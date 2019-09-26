@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Inventory</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="inventory.js"></script>
+    <script type="text/javascript" src="behavior.js"></script>
+</head>
+
+<body>
+    <h1>Home Inventory</h1>
+
+    <div id="search-area">
+        <input id="search-field" type="text">
+    </div>
+
+    <div id="results">
+        <div id="results-list">
+        </div>
+    </div>
+
+    <template id="search-result-template">
+        <div class="search-result">
+            <div class="search-result-title"></div>
+            <div class="location">
+                <div class="search-result-room"></div>
+                <div class="search-result-container"></div>
+                <div class="search-result-bin"></div>
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
