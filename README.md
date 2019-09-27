@@ -1,2 +1,5 @@
 # HomeInventoryIndex
-Indexing system for home inventory
+Indexing system for your home inventory
+
+## TODO
+- better search ranking
