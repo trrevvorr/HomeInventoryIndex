@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', initialize, false);
 function initialize() {
     Inventory = INVENTORY.map((match, i) => {
-        return { ...match, key: i, rank: 0};
+        return { ...match, key: i};
     });
     document.getElementById("search-field").addEventListener("keyup", onSearchChange);
 
@@ -11,9 +11,14 @@ function initialize() {
 
 // #region search
 function onSearchChange(searchEl) {
+    Inventory = Inventory.map((match, i) => {
+        return { ...match, rank: 0};
+    });
+
     let searchPhrase = searchEl.target.value.trim();
     let searchTerms = searchPhrase.split(/\b/).map(term => term.trim());
     let results = searchInventoryTerms(searchTerms);
+    
     clearResults();
     results.forEach(result => displayResult(result));
 
@@ -42,17 +47,31 @@ function searchInventoryTerm(term) {
 }
 
 function searchFilter(term, item) {
-    if (item.title.includes(term)) {
+    let found = false;
+    let termRegex = new RegExp(term);
+    let termRegexBegins = new RegExp(`\\b${term}`);
+
+    if (termRegexBegins.test(item.title)) {
+        item.rank += 4;
+        found = true;
+    }
+
+    if (termRegex.test(item.title)) {
         item.rank += 2;
-        return true;
+        found = true;
     }
 
-    if (item.related_terms.some(t => t.includes(term))) {
-        item.rank++;
-        return true;
+    if (item.related_terms.some(t => termRegexBegins.test(t))) {
+        item.rank += 2;
+        found = true;
     }
 
-    return false;
+    if (item.related_terms.some(t => termRegex.test(t))) {
+        item.rank += 1;
+        found = true;
+    }
+
+    return found;
 }
 
 // #endregion

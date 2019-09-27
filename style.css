@@ -47,6 +47,11 @@ body {
     border-radius: 1rem;
 }
 
+#search-field:focus {
+    outline: none;
+    border: 1px solid #AAAAAA;
+}
+
 mark {
     background-color: #214454;
     color: white;
