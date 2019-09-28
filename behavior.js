@@ -3,19 +3,26 @@ function initialize() {
     Inventory = INVENTORY.map((match, i) => {
         return { ...match, key: i};
     });
-    document.getElementById("search-field").addEventListener("keyup", onSearchChange);
+
+    let searchField = document.getElementById("search-field");
+    searchField.addEventListener("keyup", onSearchChange);
+    searchField.addEventListener("focus", onSearchFocus);
 
     let context = document.getElementById("results-list");
     ResultsMarker = new Mark(context);
 }
 
 // #region search
-function onSearchChange(searchEl) {
+function onSearchFocus(event) {
+    event.target.select();
+}
+
+function onSearchChange(event) {
     Inventory = Inventory.map((match, i) => {
         return { ...match, rank: 0};
     });
 
-    let searchPhrase = searchEl.target.value.trim();
+    let searchPhrase = event.target.value.trim();
     let searchTerms = searchPhrase.split(/\b/).map(term => term.trim());
     let results = searchInventoryTerms(searchTerms);
     
@@ -48,8 +55,8 @@ function searchInventoryTerm(term) {
 
 function searchFilter(term, item) {
     let found = false;
-    let termRegex = new RegExp(term);
-    let termRegexBegins = new RegExp(`\\b${term}`);
+    let termRegex = new RegExp(term, "i");
+    let termRegexBegins = new RegExp(`\\b${term}`, "i");
 
     if (termRegexBegins.test(item.title)) {
         item.rank += 4;
