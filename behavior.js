@@ -6,7 +6,9 @@ function initialize() {
 
     let searchField = document.getElementById("search-field");
     searchField.addEventListener("keyup", onSearchChange);
+    searchField.addEventListener("change", onSearchChange);
     searchField.addEventListener("focus", onSearchFocus);
+    document.getElementById("search-field-dictation").addEventListener("click", startDictation);
 
     let context = document.getElementById("results-list");
     ResultsMarker = new Mark(context);
@@ -101,4 +103,34 @@ function displayResult(item) {
 
     list.appendChild(clone);
 }
+// #endregion
+
+// #region speech recognition
+
+function startDictation() {
+
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function(e) {
+        let searchField = document.getElementById("search-field");
+        searchField.value = e.results[0][0].transcript;
+        searchField.dispatchEvent(new Event('change')); 
+        recognition.stop();
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+
+    }
+  }
+
 // #endregion

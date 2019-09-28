@@ -35,6 +35,8 @@ body {
 
 #search-area {
     margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: auto 2rem;
 }
 
 #search-field {
@@ -54,5 +56,12 @@ body {
 
 mark {
     background-color: #214454;
+    color: white;
+}
+
+#search-field-dictation {
+    font-size: 1.25rem;
+    background-color: transparent;
+    border: none;
     color: white;
 }

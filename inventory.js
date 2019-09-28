@@ -460,5 +460,12 @@ const INVENTORY = [
         room: "Garage",
         container: "Small Parts",
         bin: "C16"
+    },
+    {
+    title: 'extra dividers',
+    related_terms: ["separators"],
+    room: 'Garage',
+    container: 'Small Parts',
+    bin: 'A24'
     }
 ]
