@@ -34,7 +34,6 @@ body {
 }
 
 #search-area {
-    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: auto 2rem;
 }
@@ -64,4 +63,13 @@ mark {
     background-color: transparent;
     border: none;
     color: white;
+}
+
+.header {
+    position: sticky;
+    top: -2.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #333333;
+    background-color: black;
 }
